@@ -41,3 +41,19 @@ o.order_date
 FROM orders o 
 JOIN customers c ON c.customer_id = o.customer_id
 LIMIT 10
+
+-- 7) 
+WITH EmployeeSales AS (
+    SELECT Employees.Employee_ID, Employees.First_Name, Employees.Last_Name,
+           SUM(Unit_Price * Quantity * (1 - Discount)) AS Total_Sales
+    FROM Orders 
+    JOIN Order_Details ON Orders.Order_ID = Order_Details.Order_ID
+    JOIN Employees ON Orders.Employee_ID = Employees.Employee_ID
+
+    GROUP BY Employees.Employee_ID
+)
+
+SELECT employee_id , first_name , last_name, 
+ROW_NUMBER () OVER (ORDER BY Total_Sales DESC) AS "Sales Rank"
+FROM EmployeeSales
+LIMIT 10 ;
