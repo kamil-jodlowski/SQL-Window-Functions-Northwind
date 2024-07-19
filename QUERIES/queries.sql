@@ -42,7 +42,7 @@ FROM orders o
 JOIN customers c ON c.customer_id = o.customer_id
 LIMIT 10
 
--- 7) 
+-- 7) Using CTE and window functions, we discovered which employee was associated with the highest number of sales.
 WITH EmployeeSales AS (
     SELECT Employees.Employee_ID, Employees.First_Name, Employees.Last_Name,
            SUM(Unit_Price * Quantity * (1 - Discount)) AS Total_Sales
@@ -57,3 +57,5 @@ SELECT employee_id , first_name , last_name,
 ROW_NUMBER () OVER (ORDER BY Total_Sales DESC) AS "Sales Rank"
 FROM EmployeeSales
 LIMIT 10 ;
+
+
