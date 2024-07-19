@@ -39,7 +39,13 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Examining the relationship between the orders and customers table to get more detailed information about each customer
 
 ### 3.  Rank employees by sales performance
+
 - Using CTE and window functions, we discovered which employee was associated with the highest number of sales.
+- Margeret Peacock is the top-selling employee and Steven Buchanan is the lowest-selling employee in this case.
+
+### 4.  Calculate running total of sales per month
+
+- U
 
 
 
