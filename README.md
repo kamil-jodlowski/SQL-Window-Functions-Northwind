@@ -32,7 +32,9 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Checking and understanding the data one by one
 - Searching for dependencies between tables
 
-### 1. Examining the relationship between the order and employees table to see which employee is responsible for which orders.
+### 1. Examining the relationship:
+
+-between the order and employees table to see which employee is responsible for which orders.
 
 
 
