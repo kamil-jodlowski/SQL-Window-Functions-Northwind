@@ -36,5 +36,7 @@ This project aims to use advanced SQL window functions to analyze data in the No
 
 -between the order and employees table to see which employee is responsible for which orders.
 
+-Examining the relationship between the orders and customers table to get more detailed information about each customer,
+
 
 
