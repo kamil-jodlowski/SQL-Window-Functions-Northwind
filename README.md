@@ -27,5 +27,10 @@ This project aims to use advanced SQL window functions to analyze data in the No
 
 ## Project Steps:
 
+### 1. Getting to know the data
+
+- Checking and understanding the data one by one
+- Searching for dependencies between tables
+
 
 
