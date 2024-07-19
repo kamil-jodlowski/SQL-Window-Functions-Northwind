@@ -27,8 +27,17 @@ SELECT *
 FROM products
 LIMIT 5;
 
---5) -- Examining the relationship between the order and employees table to see which employee is responsible for which orders.
+--5) Examining the relationship between the order and employees table to see which employee is responsible for which orders.
 SELECT e.first_name || ' ' || e.last_name AS employee_name, o.order_id , o.order_date
 FROM orders o
 JOIN employees e ON e.employee_id = o.employee_id 
+LIMIT 10
+
+--6) Examining the relationship between the orders and customers table to get more detailed information about each customer
+SELECT o.order_id,
+c.company_name,
+c.contact_name,
+o.order_date
+FROM orders o 
+JOIN customers c ON c.customer_id = o.customer_id
 LIMIT 10
