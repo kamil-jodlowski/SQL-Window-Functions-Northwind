@@ -32,18 +32,5 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Checking and understanding the data one by one
 - Searching for dependencies between tables
 
-  %%sql
-SELECT
-    table_name as name,
-    table_type as type
-FROM information_schema.tables
-WHERE table_schema = 'public' AND table_type IN ('BASE TABLE', 'VIEW');
-
-
-%%sql
-SELECT *
-FROM customers
-LIMIT 5;
-
 
 
