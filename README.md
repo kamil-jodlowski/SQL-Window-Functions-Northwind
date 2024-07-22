@@ -45,7 +45,7 @@ This project aims to use advanced SQL window functions to analyze data in the No
 
 ### 4.  Calculate running total of sales per month
 
-- U
+- Un
 
 
 
