@@ -58,4 +58,21 @@ ROW_NUMBER () OVER (ORDER BY Total_Sales DESC) AS "Sales Rank"
 FROM EmployeeSales
 LIMIT 10 ;
 
+-- Calculate running total of sales per month: First calculating total summary for all of the months and 
+-- then as a next step calculating the running total 
+
+WITH qwerty AS (SELECT DATE_TRUNC('month', order_date) :: DATE AS Month,
+SUM(quantity*unit_price*(1-discount)) AS Total_sum 
+FROM orders
+JOIN order_details ON orders.order_id = order_details.order_id
+GROUP BY DATE_TRUNC('month', order_date)
+ORDER BY DATE_TRUNC('month', order_date) ASC)
+
+SELECT Month, 
+       SUM(Total_sum) OVER (ORDER BY Month) AS Running_Total
+FROM qwerty
+ORDER BY Month;
+
+
+
 
