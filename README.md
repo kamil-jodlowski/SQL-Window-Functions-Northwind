@@ -45,7 +45,11 @@ This project aims to use advanced SQL window functions to analyze data in the No
 
 ### 4.  Calculate running total of sales per month
 
-- Un
+- Calculate the running total of sales per month: First, calculate the total sum for each month, and then, as the next step, calculate the running total.
+
+### 5.  Calculate the month-over-month sales growth rate
+
+- C
 
 
 
