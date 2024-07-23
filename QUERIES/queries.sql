@@ -73,6 +73,35 @@ SELECT Month,
 FROM qwerty
 ORDER BY Month;
 
+-- Calculate the month-over-month sales growth rate
+
+WITH sum_for_month AS (SELECT DATE_TRUNC('month', order_date) :: DATE AS Month, 
+SUM(quantity * unit_price * (1-discount)) AS Total_sum 
+FROM Orders
+JOIN Order_details ON (Orders.order_id = Order_details.order_id)
+GROUP BY DATE_TRUNC('month', order_date)
+ORDER BY DATE_TRUNC('month', order_date) ASC),
+
+num_of_month AS (SELECT sum_for_month.month , Extract(month FROM sum_for_month.month) As month_num , sum_for_month.total_sum
+FROM sum_for_month),
+
+sales_growth AS (
+    SELECT 
+        month,
+        total_sum,
+        LAG(total_sum, 1) OVER (ORDER BY Month) AS Previous_Sales
+    FROM num_of_month),
+
+sales_chan AS (SELECT month,
+        total_sum, CASE WHEN total_sum IS NOT NULL THEN total_sum - LAG(total_sum, 1) OVER (ORDER BY month ) ELSE NULL END AS Sales_Change
+FROM sales_growth)
+
+SELECT month , sales_change / LAG(total_sum, 1) OVER (ORDER BY month ) * 100 AS Growth_rate
+FROM sales_chan
+
+
+
+
 
 
 
