@@ -58,7 +58,7 @@ ROW_NUMBER () OVER (ORDER BY Total_Sales DESC) AS "Sales Rank"
 FROM EmployeeSales
 LIMIT 10 ;
 
--- Calculate running total of sales per month: First calculating total summary for all of the months and 
+-- 8)Calculate running total of sales per month: First calculating total summary for all of the months and 
 -- then as a next step calculating the running total 
 
 WITH qwerty AS (SELECT DATE_TRUNC('month', order_date) :: DATE AS Month,
@@ -73,7 +73,7 @@ SELECT Month,
 FROM qwerty
 ORDER BY Month;
 
--- Calculate the month-over-month sales growth rate
+-- 9) Calculate the month-over-month sales growth rate
 
 WITH sum_for_month AS (SELECT DATE_TRUNC('month', order_date) :: DATE AS Month, 
 SUM(quantity * unit_price * (1-discount)) AS Total_sum 
@@ -99,6 +99,30 @@ FROM sales_growth)
 SELECT month , sales_change / LAG(total_sum, 1) OVER (ORDER BY month ) * 100 AS Growth_rate
 FROM sales_chan
 
+
+--10) Identify customers with above-average order values
+
+WITH order_totals AS (
+    SELECT order_id,
+           SUM(unit_price * quantity * (1 - discount)) AS order_value
+    FROM order_details
+    GROUP BY order_id),
+	
+average_order_value AS (
+    SELECT AVG(order_value) AS avg_value
+    FROM order_totals
+),
+
+crossik AS (SELECT order_totals.order_id,
+       order_totals.order_value,
+       average_order_value.avg_value
+FROM order_totals
+CROSS JOIN average_order_value)
+
+SELECT order_id , order_value , avg_value, 
+CASE WHEN order_value > avg_value THEN 'Above Average' ELSE 'Below Average' END AS Value_Category
+FROM crossik 
+ORDER BY order_id ASC
 
 
 
