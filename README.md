@@ -52,10 +52,11 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Appropriate connection of tables Orders and Order_Details,
 - month-over-month sales growth rate calculation
 
- ### 5.  Calculate the month-over-month sales growth rate 
+ ### 6) Identify customers with above-average order values
  
 - Appropriate connection of tables Orders and Order_Details,
-- month-over-month sales growth rate calculation
+- above-average order values by cross joining the CTE table with order_details
+
 
 
 
