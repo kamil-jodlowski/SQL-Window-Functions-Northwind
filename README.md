@@ -57,6 +57,17 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Appropriate connection of tables Orders and Order_Details,
 - above-average order values by cross joining the CTE table with order_details
 
+### 7) Calculate the percentage of total sales for each product category
+
+- Finding the total cost of products from order_details tab
+- Joining order_details tab with products tab to see the product category for each product,
+- Joining the category tab to see the name of each category,
+- Calculating the percentage of each product,
+- Beverages is the top category in terms of sales percentages, followed closely by Dairy Products. Produce and Grains/Cereals are the categories with the smallest sales percentage.
+
+### 8) 
+
+
 
 
 
