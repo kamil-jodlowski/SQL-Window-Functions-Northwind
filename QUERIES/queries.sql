@@ -156,6 +156,24 @@ ORDER BY smth.category_id ASC
 SELECT * FROM final_tab
 
 
+--Find the top 3 products sold in each category
+
+WITH total_sales AS (SELECT product_id, SUM(unit_price*quantity*(1-discount)) AS tot_sold
+FROM order_details
+GROUP BY product_id), 
+
+marge AS (SELECT products.category_id, total_sales.product_id 
+,products.product_name 
+,  total_sales.tot_sold AS "Total Sales",
+ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY total_sales.tot_sold DESC) AS numeracja
+FROM total_sales 
+JOIN products ON total_sales.product_id = products.product_id
+ORDER BY products.category_id ASC)
+
+SELECT category_id , product_id , product_name , "Total Sales"
+FROM marge
+WHERE numeracja <= 3 ;
+
 
 
 
