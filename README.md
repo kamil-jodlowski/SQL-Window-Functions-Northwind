@@ -65,7 +65,7 @@ This project aims to use advanced SQL window functions to analyze data in the No
 - Calculating the percentage of each product,
 - Beverages is the top category in terms of sales percentages, followed closely by Dairy Products. Produce and Grains/Cereals are the categories with the smallest sales percentage.
 
-### 8) 
+### 8) Find the top 3 products sold in each category
 
 
 
