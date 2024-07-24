@@ -67,6 +67,13 @@ This project aims to use advanced SQL window functions to analyze data in the No
 
 ### 8) Find the top 3 products sold in each category
 
+- Finding the total cost of products from order_details tab
+- Joining order_details tab with products tab to see the product category for each product,
+- Joining the category tab to see the name of each category
+- Identify top 3 products by window function ROW_NUMBER,
+- Select only top 3 products from the final tab 
+
+
 
 
 
