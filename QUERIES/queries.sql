@@ -125,6 +125,37 @@ FROM crossik
 ORDER BY order_id ASC
 
 
+--Calculate the percentage of total sales for each product category
+
+WITH total_cost_cal AS (SELECT product_id, 
+SUM(quantity*unit_price*(1-discount)) AS total_cost
+FROM order_details
+GROUP BY product_id), 
+
+ov_cost AS (SELECT SUM(total_cost) AS overall_cost 
+FROM total_cost_cal), 
+
+marge AS (SELECT total_cost_cal.product_id , total_cost_cal.total_cost , ov_cost.overall_cost
+FROM total_cost_cal
+CROSS JOIN ov_cost ), 
+
+marge_category AS (SELECT marge.product_id, products.category_id, marge.total_cost ,marge.overall_cost
+FROM marge
+JOIN products ON marge.product_id = products.product_id),
+
+smth AS (SELECT marge_category.category_id , categories.category_name,  SUM(marge_category.total_cost) AS ok , marge_category.overall_cost
+FROM marge_category
+JOIN categories ON categories.category_id = marge_category.category_id
+GROUP BY marge_category.category_id , categories.category_name, marge_category.overall_cost
+ORDER BY marge_category.category_id ASC),
+
+final_tab AS (SELECT smth.category_id , smth.category_name, (smth.ok *1.00 / smth.overall_cost *1.00) * 100.00 AS "Sales Percentage" 
+FROM smth
+ORDER BY smth.category_id ASC
+)
+SELECT * FROM final_tab
+
+
 
 
 
